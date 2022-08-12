@@ -1,12 +1,12 @@
 from sre_constants import IN
 
 
-INF = 999999
+INF = 2
 DIST_NULA = '0'
 COLUNAS_PERMUTACAO = [1,2,3]
 matriz = [[DIST_NULA, 5, 3, 1], 
-    [5, DIST_NULA, INF, 4],
-    [3, INF, DIST_NULA, 2],
+    [5, DIST_NULA, 10, 4],
+    [3, 10, DIST_NULA, 2],
     [1, 4, 2, DIST_NULA]]
 
 

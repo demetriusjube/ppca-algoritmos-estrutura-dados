@@ -1,0 +1,3 @@
+caracteresAbertura = {'{', '[', '('}
+caracteresFechamento = {'}', ']', ')'}
+stringTeste = "{({}[])()[]}[]{}()"

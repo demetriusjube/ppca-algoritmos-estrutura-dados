@@ -19,3 +19,38 @@
 # False
 # ())
 # False
+
+class Pilha:
+    
+    def __init__(self):
+        self.data = []
+
+    def estaVazio(self):
+        return self.tamanho() == 0
+
+    def push(self, item):
+        self.data.append(item)
+
+    def pop(self):
+        return self.data.pop()
+    
+    def tamanho(self):
+        return len(self.data)
+
+def verificaParanteses(expressao):
+    pilha = Pilha()
+    
+    for caracter in expressao:
+        if caracter == '(':
+            pilha.push(caracter)
+        elif caracter == ')':
+            if pilha.tamanho() > 0:
+                pilha.pop()
+            else:
+                pilha.push(')')
+                break
+        
+    return pilha.estaVazio()
+
+x = input()
+print(verificaParanteses(x))

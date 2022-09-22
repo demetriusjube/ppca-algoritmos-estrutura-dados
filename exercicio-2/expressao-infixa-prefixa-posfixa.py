@@ -25,3 +25,21 @@
 # Input	Result
 # 1 2 + 3 4 + *
 # 21
+
+
+def calculaPosFixa(expressao):
+    acumulador = []
+    for caracter in expressao.split():
+        if (caracter.isnumeric()):
+            acumulador.append(int(caracter))
+        elif (caracter == '+'):
+            soma = acumulador.pop() + acumulador.pop()
+            acumulador.append(soma)
+        elif (caracter == '*'):
+            multiplicacao = acumulador.pop() * acumulador.pop()
+            acumulador.append(multiplicacao)
+    return acumulador.pop()
+
+
+x = input()
+print(calculaPosFixa(x))

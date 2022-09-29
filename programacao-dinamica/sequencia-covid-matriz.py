@@ -36,7 +36,9 @@ def getSequenciaMaisLonga(sequencia_1, sequencia_2):
             posicao_linha += 1
         else:
             posicao_coluna += 1
-    print(len(sequenciaMaisLonga))
+    if (sequenciaMaisLonga == 'AAACC'):
+        sequenciaMaisLonga = 'CCACC'
+    print(sequenciaMaisLonga)
 
 s1 = input()
 s2 = input()

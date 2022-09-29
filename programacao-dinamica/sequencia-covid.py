@@ -42,9 +42,7 @@
 # 4
 
 
-def sequenciaMaisLonga(sequencia1, sequencia2):
-    sequenciasVistas = set()
-    sequencias = []
+def sequenciaMaisLonga(sequencia1:str, sequencia2:str):
     sequenciaMaisLonga = ''
     maiorExpressao = sequencia1
     menorExpressao = sequencia2
@@ -53,35 +51,47 @@ def sequenciaMaisLonga(sequencia1, sequencia2):
     if (tamanhoSequencia2 >= tamanhoSequencia1):
         maiorExpressao = sequencia2
         menorExpressao = sequencia1
-    tamanhoMenorExpressao = len(menorExpressao)
-    for i in range(1,tamanhoMenorExpressao):
-        tamanhoJanela = i+1
-        ultimoIndice = i+tamanhoJanela
-        if (ultimoIndice > tamanhoMenorExpressao):
-            ultimoIndice = tamanhoMenorExpressao 
-        for j in range(tamanhoMenorExpressao):
-            caracteresJanela = menorExpressao[j:j+tamanhoJanela]
-            if len(caracteresJanela) >= tamanhoJanela :
-                # sequenciasVistas.add(caracteresJanela)
-                sequencias.append(caracteresJanela)
-            # print(caracteresJanela)
-    for i in range(2,tamanhoMenorExpressao):
-        sequenciaLongaDoConjunto = ''
-        colecaoRange = filter(lambda caracter: len(caracter) == i, sequencias)
-        ultimaPosicao = 0
-        for item in colecaoRange:
-            posicao = maiorExpressao.find(item)
-            if (posicao >= 0):
-                if (posicao >= ultimaPosicao):
-                    sequenciaLongaDoConjunto += item
-                else:
-                    sequenciaLongaDoConjunto = item
-                ultimaPosicao = posicao
+    matriz_logica = []
+    linha_zeros = []
+    for i in range(len(maiorExpressao)):
+        linha_zeros.append(0)
+    linha_comparacao = [char for char in maiorExpressao]
+    coluna_comparacao = [char for char in menorExpressao]
+    for i in range(len(menorExpressao)):
+        matriz_logica.append(linha_zeros.copy())
+    posicao_coluna = 0
+    for caracter_coluna in coluna_comparacao:
+        posicao_linha = 0
+        for caracter_linha in linha_comparacao:
+            if (caracter_coluna == caracter_linha):
+                matriz_logica[posicao_coluna][posicao_linha] = 1
+            posicao_linha += 1
+        posicao_coluna += 1
+    resultado = linha_zeros.copy()
+    for linha in matriz_logica:
+        for indice in range(len(linha)):
+            resultado[indice]+=linha[indice]
+    maiorSeq = ""
+    i, j = 0, 0
+    while ((i < len(linha_comparacao)) and (j < len(coluna_comparacao))):
+        if linha_comparacao[j] == coluna_comparacao[i]:
+            maiorSeq = maiorSeq + linha_comparacao[j]
+            i, j = i + 1, j + 1
+        elif matriz_logica[i + 1][j] >= matriz_logica[i][j + 1]:
+            i += 1
+        else:
+            j += 1
+    print(maiorSeq)
+    # for indice_marcador in range(len(resultado)):
+    #     if (resultado[indice_marcador] > 0):
+    #         sequenciaMaisLonga += linha_comparacao[indice_marcador]
+    
+    # print(sequenciaMaisLonga)
 
-        if (len(sequenciaLongaDoConjunto) > len(sequenciaMaisLonga)):
-            sequenciaMaisLonga = sequenciaLongaDoConjunto
-    print(len(sequenciaMaisLonga))
+# arg1=input()
+# arg2=input()
+# sequenciaMaisLonga('CAGGGTAGTC', 'TCATATC')
+sequenciaMaisLonga('ACCATGTGAG', 'CCGCAGTGGA')
+# sequenciaMaisLonga('CCGCAGTGGAA','CGTTTGGCGGTCCAGATTGC')
+# sequenciaMaisLonga('CCGCAGTGGAACC','AACACACCG')
 
-arg1=input()
-arg2=input()
-sequenciaMaisLonga(arg1, arg2)
